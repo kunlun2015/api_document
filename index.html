@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Examples</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="" rel="stylesheet">
+    <script src="react.js"></script>
+    <script src="react-dom.js"></script>
+    <script src="browser.min.js"></script> 
+</head>
+<body>           
+    <div id="root"></div>    
+    <script type="text/babel">
+        function NumberList(props) {
+            console.log(props)
+            const numbers = props.numbers;
+            const listItems = numbers.map((number) =>
+                <li data-id="keynumber" key={number.toString()}>{number}</li>
+            );
+            return (
+                <ul>{listItems}</ul>
+            );
+        }
+        const numbers = [1, 2, 3, 4, 5];
+        ReactDOM.render(
+            <NumberList numbers={numbers} name='kunlun' />,
+            document.getElementById('root')
+        )
+        function ActionLink(){
+            function postRequest(){
+                fetch('http://localhost/test/test.php',{
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                      },
+                })
+                .then((response) => response.json())
+                .then((responseText) => {
+                    console.log(responseText.name);
+                })
+                .catch((error) => {
+                    console.warn(error);
+                });
+                return false;
+            }
+            return (
+                <a href="#" onClick={postRequest}>
+                  Click me
+                </a>
+              );
+        }
+        ReactDOM.render(<ActionLink />, document.getElementById('root'));        
+    </script>
+</body>
+</html>
